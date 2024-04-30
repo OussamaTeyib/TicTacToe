@@ -98,6 +98,7 @@ int GetComputerMove(int *board)
 int GetAIMove(int *board)
 {
    // TBD
+   (void) board;
    return 0;
 }
 
@@ -137,74 +138,75 @@ int main(void)
         switch (choice)
         {
             case 1: // PvsP
-            {
-                initBoard(board);
-                int p = 1; 
-
-                printBoard(board);
-                while (1)
                 {
-                    printf("Player %d, Enter your move\n", p);
-                    int move = GetPlayerMove(board);
-                    board[move - 1] = p;
-                    printBoard(board);
+                    initBoard(board);
+                    int p = 1; 
 
-	            if (isWin(board, p))
-	            {
-	                printf("\nPlayer %d Won!", p);
-	                break;
-                    }
-	            else if (isFull(board))
-	            {
-	                printf("\nGame Over!");
-	                break;
-                    }
+                    printBoard(board);
+                    while (1)
+                    {
+                        printf("Player %d, Enter your move\n", p);
+                        int move = GetPlayerMove(board);
+                        board[move - 1] = p;
+                        printBoard(board);
+
+	                if (isWin(board, p))
+	                {
+	                    printf("\nPlayer %d Won!", p);
+    	                break;
+                        }
+	                else if (isFull(board))
+	                {
+	                    printf("\nGame Over!");
+	                    break;
+                        }
                    
-	            p = (1 == p? 2 : 1);
-                }
-	    }
-            break;
+	                p = (1 == p? 2 : 1);
+                    }
+	        }
+                break;
 
             case 2: // PvsC
-            {
-                initBoard(board);
-
-                int firstP;
-                printf("\nDo you want to play the first? (1/0)\n");
-                printf(">>> ");
-                fflush(stdin);
-                scanf("%d", &firstP);
-                int p = firstP? 1: 2;
-
-                printBoard(board);
-                while (1)
                 {
-                    int move;
-                    if (1 == p)
-                    {
-                        printf("Enter your move\n");
-                        move = GetPlayerMove(board);
-                    } 
-                    else
-                        move = GetComputerMove(board);
+                    initBoard(board);
 
-                    board[move - 1] = p;
+                    int firstP;
+                    printf("\nDo you want to play the first? (1/0)\n");
+                    printf(">>> ");
+                    fflush(stdin);
+                    scanf("%d", &firstP);
+                    int p = firstP? 1: 2;
+
                     printBoard(board);
+                    while (1)
+                    {
+                        int move;
+                        if (1 == p)
+                        {
+                            printf("Enter your move\n");
+                            move = GetPlayerMove(board);
+                        } 
+                        else
+                            move = GetComputerMove(board);
 
-	            if (isWin(board, p))
-	            {
-	                printf("\n%s Won!", (1 == p? "You": "The Computer"));
-	                break;
-                    }
-	            else if (isFull(board))
-	            {
-	                printf("\nGame Over!");
-	                break;
-                    }
+                        board[move - 1] = p;
+                        printBoard(board);
+
+        	        if (isWin(board, p))
+	                {
+	                    printf("\n%s Won!", (1 == p? "You": "The Computer"));
+	                    break;
+                        }
+	                else if (isFull(board))
+	                {
+	                    printf("\nGame Over!");
+	                    break;
+                        }
                    
-	            p = (1 == p? 2 : 1);
+	                p = (1 == p? 2 : 1);
+                    }
                 }
-            }
+                break;
 
             case 0: // Exit
                 again = 0;
