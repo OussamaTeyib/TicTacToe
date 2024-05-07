@@ -8,11 +8,12 @@ $(BIN_DIR)/xo: $(SRC_DIR)/xo.c
 	@mkdir -p bin
 	@$(CC) $(CFLAGS) -o $(BIN_DIR)/xo $(SRC_DIR)/xo.c
 
-.PHONY: push clear
+.PHONY: push clean
 
 push:
 	@git add .
 	@git commit -m "$(msg)"
 	@git push origin main
-clear:
+
+clean:
 	@rm -r bin
